@@ -137,7 +137,14 @@ dependencies.select(&:top_level?).each do |dep|
     credentials: credentials,
   )
 
-  next if checker.up_to_date?
+  print "Dependency #{dep.name} #{dep.version}"
+  print "up_to_date: #{checker.up_to_date?} "
+  print "vulnerable: #{checker.vulnerable?} "
+  print "latest_version: #{checker.latest_version} "
+  print "lowest_security_fix_version: #{checker.lowest_security_fix_version} "
+  print "lowest_resolvable_security_fix_version: #{checker.lowest_resolvable_security_fix_version} "
+  
+  next unless checker.vulnerable?
 
   requirements_to_unlock =
     if !checker.requirements_unlocked_or_can_be?
