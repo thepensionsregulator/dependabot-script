@@ -144,7 +144,7 @@ dependencies.select(&:top_level?).each do |dep|
   print "lowest_security_fix_version: #{checker.lowest_security_fix_version} "
   print "lowest_resolvable_security_fix_version: #{checker.lowest_resolvable_security_fix_version} "
   
-  next unless checker.vulnerable?
+  next if "#{checker.lowest_resolvable_security_fix_version}".empty?
 
   requirements_to_unlock =
     if !checker.requirements_unlocked_or_can_be?
